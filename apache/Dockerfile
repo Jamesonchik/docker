@@ -91,11 +91,14 @@ RUN set -ex; \
 
 COPY php.ini /usr/local/etc/php/conf.d/php-matomo.ini
 
-COPY docker-entrypoint.sh /entrypoint.sh
+#COPY docker-entrypoint.sh /entrypoint.sh
+COPY docker-entrypoint.sh /usr/src/app/entrypoint.sh
 
 # WORKDIR is /var/www/html (inherited via "FROM php")
 # "/entrypoint.sh" will populate it at container startup from /usr/src/matomo
 VOLUME /var/www/html
 
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
+RUN chmod +x /usr/src/app/entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 CMD ["apache2-foreground"]

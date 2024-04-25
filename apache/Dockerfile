@@ -102,3 +102,6 @@ VOLUME /var/www/html
 RUN chmod +x /usr/src/app/entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 CMD ["apache2-foreground"]
+
+HEALTHCHECK --interval=30s --timeout=20s --start-period=10s \
+  CMD /usr/local/bin/healthcheck
